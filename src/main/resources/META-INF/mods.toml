@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="All rights reserved"
+
+[[mods]]
+modId="boku-no-minecraft"
+version="${file.jarVersion}"
+displayName="Boku No Minecraft: Remastered"
+authors="Redstoneguy129, Gillygogs"
+description='''
+My Hero Academia In Minecraft
+'''
+
+[[dependencies.boku-no-minecraft]]
+   modId="forge"
+   mandatory=true
+   versionRange="[36,)"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.boku-no-minecraft]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="[1.16.5,1.17)"
+   ordering="NONE"
+   side="BOTH"
