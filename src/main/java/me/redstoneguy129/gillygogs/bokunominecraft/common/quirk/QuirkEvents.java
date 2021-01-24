@@ -6,11 +6,13 @@ import me.redstoneguy129.gillygogs.bokunominecraft.common.events.BNMRQuirkKeyEve
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.BNMRNetworking;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.QuirkSetPacket;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.QuirkTogglePacket;
+import me.redstoneguy129.gillygogs.bokunominecraft.common.objects.quirks.BNMRQuirks;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -20,13 +22,18 @@ import java.util.Random;
 public class QuirkEvents {
 
     @SubscribeEvent
-    public void GiveQuirk(EntityJoinWorldEvent event) {
+    public void giveQuirkOnJoin(EntityJoinWorldEvent event) {
         if(!(event.getEntity() instanceof PlayerEntity)) return;
-        event.getEntity().getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
+        PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+        playerEntity.getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
+            System.out.println("RUNNING");
             if(!playerCapability.hasLoggedInBefore()) {
                 playerCapability.setLoggedInBefore(true);
-                if(event.getWorld().isRemote())
-                    BNMRNetworking.instance.sendToServer(new QuirkSetPacket(((Quirk) Quirk.QUIRK.getValues().toArray()[event.getWorld().rand.nextInt(Quirk.QUIRK.getValues().size())]).getRegistryName(), event.getEntity().getEntityId()));
+                if(event.getWorld().isRemote()) {
+                    Quirk quirk = BNMRQuirks.DARK_SHADOW.get();
+                    playerCapability.setQuirk(quirk);
+                    BNMRNetworking.instance.sendToServer(new QuirkSetPacket(quirk.getRegistryName(), playerEntity.getEntityId()));
+                }
             }
         });
     }

@@ -1,5 +1,7 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.networking;
 
+import com.mojang.authlib.GameProfile;
+import me.redstoneguy129.gillygogs.bokunominecraft.BokuNoMinecraft;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapabilityProvider;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.quirk.Quirk;
 import net.minecraft.client.Minecraft;
@@ -7,10 +9,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
+import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class QuirkSetPacket {
@@ -35,17 +41,20 @@ public class QuirkSetPacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            PlayerEntity player = ctx.get().getSender();
-            if(ctx.get().getDirection().getReceptionSide().isClient()) {
+            PlayerEntity playerEntity;
+            if(ctx.get().getDirection().getReceptionSide().isServer()) {
+                playerEntity = ctx.get().getSender();
+            } else {
                 assert Minecraft.getInstance().world != null;
-                player = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.playerEntityId);
+                playerEntity = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.playerEntityId);
             }
-            if(player != null) {
-                player.getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
+            if(playerEntity != null) {
+                playerEntity.getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
+                    BokuNoMinecraft.LOGGER.debug("THIS SHOULD BE RAN ON CLIENT!");
                     playerCapability.setQuirk(quirk);
                 });
                 if(ctx.get().getDirection().getReceptionSide().isServer())
-                    BNMRNetworking.instance.sendTo(new QuirkSetPacket(quirk.getRegistryName(), playerEntityId), ((ServerPlayerEntity) player).connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
+                    BNMRNetworking.instance.sendTo(new QuirkSetPacket(quirk.getRegistryName(), playerEntityId), ((ServerPlayerEntity) playerEntity).connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
             }
         });
         ctx.get().setPacketHandled(true);

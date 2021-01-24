@@ -1,5 +1,6 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.networking;
 
+import me.redstoneguy129.gillygogs.bokunominecraft.BokuNoMinecraft;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapabilityProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,13 +34,15 @@ public class QuirkTogglePacket {
                 assert Minecraft.getInstance().world != null;
                 player = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.playerEntityId);
             }
-            System.out.println("Ok this is weird");
             if (player != null) {
                 PlayerEntity finalPlayer = player;
                 player.getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
                     if(playerCapability.getQuirk() != null) {
-                        System.out.println(playerCapability.getQuirk());
-                        playerCapability.getQuirk().activated = !playerCapability.getQuirk().activated;
+                        BokuNoMinecraft.LOGGER.debug("--------------");
+                        System.out.println(playerCapability.getQuirk().activated);
+                        if(ctx.get().getDirection().getReceptionSide().isServer()) playerCapability.getQuirk().activated = !playerCapability.getQuirk().activated;
+                        System.out.println(playerCapability.getQuirk().activated);
+                        BokuNoMinecraft.LOGGER.debug("--------------");
                         if(playerCapability.getQuirk().activated)
                             playerCapability.getQuirk().onActivated(finalPlayer);
                         else playerCapability.getQuirk().onDeactivated(finalPlayer);
