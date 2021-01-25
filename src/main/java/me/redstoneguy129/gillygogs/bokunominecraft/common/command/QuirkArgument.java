@@ -1,7 +1,5 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.command;
 
-import com.google.common.collect.Iterables;
-import com.ibm.icu.impl.CollectionSet;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,15 +9,15 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.quirk.Quirk;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.ISuggestionProvider;
-import net.minecraft.command.arguments.EntitySelectorParser;
-import net.minecraft.command.arguments.ResourceLocationArgument;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 public class QuirkArgument implements ArgumentType<Quirk> {
     private static final Collection<String> EXAMPLES = Arrays.asList("boku-no-minecraft:quirkless");

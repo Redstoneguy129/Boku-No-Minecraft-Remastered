@@ -12,4 +12,5 @@ public class BNMRQuirks {
     public static final RegistryObject<Quirk> DARK_SHADOW = REGISTERS.register("dark_shadow", DarkShadowQuirk::new);
     public static final RegistryObject<Quirk> HARDENING = REGISTERS.register("hardening", HardeningQuirk::new);
     public static final RegistryObject<Quirk> TAIL = REGISTERS.register("tail", TailQuirk::new);
+    public static final RegistryObject<Quirk> AIR_WALK = REGISTERS.register("air_walk", AirWalkQuirk::new);
 }

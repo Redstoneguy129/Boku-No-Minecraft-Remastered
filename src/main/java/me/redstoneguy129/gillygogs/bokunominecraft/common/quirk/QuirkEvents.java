@@ -5,19 +5,16 @@ import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCap
 import me.redstoneguy129.gillygogs.bokunominecraft.common.events.BNMRQuirkKeyEvent;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.BNMRNetworking;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.QuirkSetPacket;
-import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.QuirkTogglePacket;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.objects.quirks.BNMRQuirks;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class QuirkEvents {
 

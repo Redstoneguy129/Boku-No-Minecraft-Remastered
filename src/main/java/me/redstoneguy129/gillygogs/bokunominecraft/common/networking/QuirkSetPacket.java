@@ -1,6 +1,5 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.networking;
 
-import com.mojang.authlib.GameProfile;
 import me.redstoneguy129.gillygogs.bokunominecraft.BokuNoMinecraft;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapabilityProvider;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.quirk.Quirk;
@@ -9,14 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.PacketDistributor;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 public class QuirkSetPacket {

@@ -1,7 +1,6 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.events;
 
 import me.redstoneguy129.gillygogs.bokunominecraft.client.BNMRKeyBinds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;

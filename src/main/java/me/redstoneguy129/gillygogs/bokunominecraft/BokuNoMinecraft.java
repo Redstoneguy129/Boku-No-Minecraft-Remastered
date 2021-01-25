@@ -1,11 +1,11 @@
 package me.redstoneguy129.gillygogs.bokunominecraft;
 
 import me.redstoneguy129.gillygogs.bokunominecraft.client.BNMRKeyBinds;
-import me.redstoneguy129.gillygogs.bokunominecraft.common.command.BNMRCommands;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.CapabilityEvents;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.IPlayerCapability;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapability;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapabilityStorage;
+import me.redstoneguy129.gillygogs.bokunominecraft.common.command.BNMRCommands;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.BNMRNetworking;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.objects.quirks.BNMRQuirks;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.quirk.QuirkEvents;

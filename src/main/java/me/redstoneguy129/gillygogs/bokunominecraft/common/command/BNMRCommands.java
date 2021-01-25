@@ -1,7 +1,8 @@
 package me.redstoneguy129.gillygogs.bokunominecraft.common.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import me.redstoneguy129.gillygogs.bokunominecraft.common.capabilities.PlayerCapabilityProvider;
+import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.BNMRNetworking;
+import me.redstoneguy129.gillygogs.bokunominecraft.common.networking.QuirkSetPacket;
 import me.redstoneguy129.gillygogs.bokunominecraft.common.quirk.Quirk;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -20,7 +21,7 @@ public class BNMRCommands {
     }
 
     private int setQuirk(ServerPlayerEntity serverPlayerEntity, Quirk quirk) {
-        serverPlayerEntity.getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(iPlayerCapability -> iPlayerCapability.setQuirk(quirk));
+        BNMRNetworking.instance.sendToServer(new QuirkSetPacket(quirk.getRegistryName(), serverPlayerEntity.getEntityId()));
         return 1;
     }
 }
